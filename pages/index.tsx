@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Footer } from "../components/Footer";
 
 const Root = styled.div`
   padding: 1px;
@@ -9,37 +10,6 @@ const Root = styled.div`
   background-image: url("/bg.svg");
   background-size: cover;
   position: relative;
-`;
-
-const Footer = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 54px;
-  right: 0px;
-  left: 0px;
-  bottom: 0px;
-  background: #031323;
-`;
-
-const CopyRight = styled.div`
-  position: absolute;
-  height: 100%;
-  right: 2rem;
-
-  font-family: Untitled Sans;
-  font-size: 12px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-
-  color: #ffffff;
-`;
-
-const Logo = styled.img`
-  position: absolute;
-  left: 8rem;
-  height: 16px;
-  bottom: 19px;
 `;
 
 const Modal = styled.div`
@@ -109,13 +79,7 @@ export default () => {
         <Input placeholder="Enter email..."></Input>
         <Button>Login</Button>
       </Modal>
-
-      <Footer>
-        <Logo src="/logo.svg"></Logo>
-        <CopyRight>
-          Copyright © 2018&nbsp;<b> Theorem </b>, LLC. All Rrights Reserved.
-        </CopyRight>
-      </Footer>
+      <Footer />
     </Root>
   );
 };
