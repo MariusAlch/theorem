@@ -11,6 +11,8 @@ const Global = createGlobalStyle`
   }
   html {
     font-size: 16px;
+    line-height: 19px;
+    color: #031323;
     font-family: Untitled sans;
   }
   * {

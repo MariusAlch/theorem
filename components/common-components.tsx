@@ -11,7 +11,6 @@ export const PrimaryButton = styled.div<{ disabled?: boolean }>`
 
   color: #ffffff;
   font-weight: bold;
-  border-radius: 4px;
   background: #ab61e5;
   border-radius: 4px;
   user-select: none;
@@ -29,26 +28,12 @@ export const PrimaryButton = styled.div<{ disabled?: boolean }>`
   `}
 `;
 
-export const SecondaryButton = styled.div`
-  height: 48px;
-  width: 160px;
-  font-size: 16px;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+export const SecondaryButton = styled(PrimaryButton)`
   color: #031323;
-  font-weight: bold;
-  border-radius: 4px;
   background: #fff;
-  border-radius: 4px;
-  user-select: none;
   :hover {
     filter: brightness(0.9);
   }
-  cursor: pointer;
-  transition: all 0.1s ease;
   border: 1px solid #d9dcde;
 `;
 
