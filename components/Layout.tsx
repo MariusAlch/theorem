@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { Footer } from "../components/Footer";
 
 const Root = styled.div`
-  padding: 1px;
+  padding-top: 1px;
+  padding-bottom: 16rem;
   min-height: 100vh;
   max-width: 100%;
   position: relative;
@@ -33,7 +34,7 @@ const Links = styled.div`
 const HeaderLink = styled.div<{ highlight: boolean }>`
   height: 100%;
 
-  width: 11rem;
+  padding: 0px 1rem;
   font-weight: bold;
   display: inline-flex;
   align-items: center;
@@ -175,3 +176,5 @@ export const Layout: React.FunctionComponent<{}> = props => {
     </Root>
   );
 };
+
+// TODO: implement logout

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const PrimaryButton = styled.div`
+export const PrimaryButton = styled.div<{ disabled?: boolean }>`
+  height: 48px;
+  width: 160px;
   font-size: 16px;
   line-height: 19px;
   display: flex;
@@ -18,9 +20,18 @@ export const PrimaryButton = styled.div`
   }
   cursor: pointer;
   transition: all 0.1s ease;
+
+  ${p =>
+    p.disabled &&
+    `
+    background: #ACB1B6;
+    pointer-events: none;
+  `}
 `;
 
 export const SecondaryButton = styled.div`
+  height: 48px;
+  width: 160px;
   font-size: 16px;
   line-height: 19px;
   display: flex;
@@ -39,4 +50,10 @@ export const SecondaryButton = styled.div`
   cursor: pointer;
   transition: all 0.1s ease;
   border: 1px solid #d9dcde;
+`;
+
+export const AvatarImage = styled.img`
+  border-radius: 100%;
+  height: 3.5rem;
+  width: 3.5rem;
 `;

@@ -5,7 +5,7 @@ import { PrimaryButton, SecondaryButton } from "../components/common-components"
 
 const Root = styled.div`
   margin-left: 24rem;
-  max-width: 60rem;
+  max-width: 50rem;
   margin-top: 3rem;
 `;
 
@@ -138,5 +138,3 @@ export default () => {
     </Layout>
   );
 };
-
-// TODO: header links hover effect
