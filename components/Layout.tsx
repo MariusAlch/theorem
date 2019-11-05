@@ -137,6 +137,7 @@ const Logout = styled.div`
   text-transform: uppercase;
   color: #59636e;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export const Layout: React.FunctionComponent<{}> = props => {

@@ -66,7 +66,7 @@ export default () => {
             <ScaleBlock />
             <ScaleBlock />
           </ScaleSection>
-          <RateSelected>8/10</RateSelected>
+          <RateSelected>7/10</RateSelected>
         </QuestionTemplate>
       </Root>
     </Layout>

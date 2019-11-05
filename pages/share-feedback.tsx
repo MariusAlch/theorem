@@ -42,7 +42,7 @@ const PeriodSelect = styled.div`
   box-sizing: border-box;
   border-radius: 3px;
   display: flex;
-  height: 50px;
+  height: 48px;
   width: 342px;
   justify-content: space-between;
   align-items: center;
