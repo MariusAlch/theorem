@@ -87,6 +87,7 @@ const Text = styled.div`
 
 interface Props {
   feedback: Feedback[];
+  type?: "received" | "given";
 }
 
 export const PreviewFeedback: React.FunctionComponent<Props> = props => {
@@ -99,8 +100,10 @@ export const PreviewFeedback: React.FunctionComponent<Props> = props => {
         <LeftTitle>Feedback Received</LeftTitle>
         {props.feedback.map((feedback, i) => (
           <Person onClick={() => setSelectedIndex(i)} selected={selectedIndex === i} key={i}>
-            <AvatarImage style={{ marginRight: "1rem" }} src={feedback.user.avatar}></AvatarImage>
-            <Name>{feedback.user.fullName}</Name>
+            <AvatarImage
+              style={{ marginRight: "1rem" }}
+              src={props.type === "received" ? (feedback as any).from.avatar : feedback.user.avatar}></AvatarImage>
+            <Name>{props.type === "received" ? (feedback as any).from.fullName : feedback.user.fullName}</Name>
           </Person>
         ))}
       </LeftContent>

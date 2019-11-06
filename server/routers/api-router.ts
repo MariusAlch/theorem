@@ -79,9 +79,26 @@ apiRouter.post("/api/logout", (req, res) => {
 apiRouter.get("/api/me", (req, res) => {
   const user = users.find(_ => _.email === req.session.email);
 
-  const feedbackForMe = users
-    .flatMap(user => user.feedback)
-    .filter(feedback => feedback.user.email === req.session.email && !!feedback.answers);
+  const feedbackForMe: Feedback[] = users
+    .flatMap(user =>
+      user.feedback.map(feedback => {
+        return {
+          feedback,
+          from: {
+            fullName: user.fullName,
+            email: user.email,
+            avatar: user.avatar,
+          },
+        };
+      }),
+    )
+    .filter(({ feedback }) => feedback.user.email === req.session.email && !!feedback.answers)
+    .map(({ feedback, from }) => {
+      return {
+        ...feedback,
+        from,
+      };
+    });
 
   res.json({ ...user, feedbackForMe });
 });

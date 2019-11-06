@@ -26,3 +26,9 @@ export interface User {
   email: string;
   feedback: Feedback[];
 }
+
+export interface Author {
+  email: string;
+  avatar: string;
+  fullName: string;
+}

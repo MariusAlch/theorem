@@ -2,10 +2,10 @@ import { createContainer } from "unstated-next";
 import { useState } from "react";
 import axios from "axios";
 import Router from "next/router";
-import { User, Feedback, Answer } from "../shared/types";
+import { User, Feedback, Answer, Author } from "../shared/types";
 
 export const StateContainer = createContainer(() => {
-  const [user, setUser] = useState<User & { feedbackForMe: Feedback[] }>(null);
+  const [user, setUser] = useState<User & { feedbackForMe: ({ from: Author } & Feedback)[] }>(null);
 
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [value, setValue] = useState<string>("");

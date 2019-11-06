@@ -2,6 +2,7 @@ import "normalize.css/normalize.css";
 
 import React from "react";
 import App from "next/app";
+import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
 import { StateContainer } from "../components/StateContainer";
 
@@ -42,6 +43,10 @@ export default class extends App {
     const { Component, pageProps } = this.props;
     return (
       <>
+        <Head>
+          <meta name="viewport" content="initial-scale=1, width=1920" />
+          <title>Theorem prototype</title>
+        </Head>
         <Global />
         <StateContainer.Provider>
           <Component {...pageProps} />

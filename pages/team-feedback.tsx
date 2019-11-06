@@ -126,7 +126,7 @@ export default ProtectedRoute(() => {
                   </PeriodSection>
                 </PeriodControls>
               </TopSection>
-              <PreviewFeedback feedback={feedbackReceived}></PreviewFeedback>
+              <PreviewFeedback type="received" feedback={feedbackReceived}></PreviewFeedback>
             </>
           )}
         </OptionalRender>
