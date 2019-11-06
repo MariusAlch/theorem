@@ -7,6 +7,7 @@ import { StateContainer } from "../components/StateContainer";
 import { OptionalRender } from "../components/OptionalRender";
 import { useEffect } from "react";
 import Link from "next/link";
+import Router from "next/router";
 
 const Root = styled.div`
   margin-left: 24rem;
@@ -113,6 +114,11 @@ export default ProtectedRoute(() => {
     return null;
   }
 
+  function onFillOutClick(email: string) {
+    stateContainer.resetQuestions();
+    Router.push({ pathname: "/fill-questions", query: { email } });
+  }
+
   return (
     <Layout page="share-feedback">
       <Root>
@@ -134,9 +140,7 @@ export default ProtectedRoute(() => {
                 <PersonName>{feedback.user.fullName}</PersonName>
               </PersonSummary>
               <OptionalRender shouldRender={!feedback.answers}>
-                <Link href={{ pathname: "/fill-questions", query: { email: feedback.user.email } }}>
-                  <StyledPrimaryButton>Fill Out</StyledPrimaryButton>
-                </Link>
+                <StyledPrimaryButton onClick={() => onFillOutClick(feedback.user.email)}>Fill Out</StyledPrimaryButton>
               </OptionalRender>
               <OptionalRender shouldRender={!!feedback.answers}>
                 <Link href="/my-feedback">

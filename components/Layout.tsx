@@ -151,17 +151,9 @@ export const Layout: React.FunctionComponent<{
 }> = props => {
   const stateContainer = StateContainer.useContainer();
 
-  useEffect(() => {
-    stateContainer.init();
-  }, []);
-
   async function onLogout() {
     await axios.post("/api/logout");
     Router.replace("/");
-  }
-
-  if (!stateContainer.user) {
-    return null;
   }
 
   return (

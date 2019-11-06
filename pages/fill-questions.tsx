@@ -36,7 +36,7 @@ export default () => {
   const question = feedback.questions[questionIndex];
 
   return (
-    <Layout>
+    <Layout page="share-feedback">
       <Root>
         <OptionalRender shouldRender={question.type === "text"}>
           {() => <TextQuestion question={question} value={stateContainer.value} onChange={stateContainer.setValue} />}

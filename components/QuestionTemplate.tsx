@@ -99,11 +99,6 @@ export const QuestionTemplate: React.FunctionComponent<Props> = props => {
     Router.push("/share-feedback");
   }
 
-  Router.beforePopState(() => {
-    stateContainer.resetQuestions();
-    return true;
-  });
-
   return (
     <>
       <BackButton onClick={onBack}>

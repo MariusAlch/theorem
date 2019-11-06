@@ -105,7 +105,7 @@ export const PreviewFeedback: React.FunctionComponent<Props> = props => {
         ))}
       </LeftContent>
       <RightContent>
-        <RightTitle>Chris Trott’s Feedback</RightTitle>
+        <RightTitle>{selectedFeedback.user.fullName}’s Feedback</RightTitle>
         {selectedFeedback.answers.map((answer, i) => (
           <>
             <OptionalRender shouldRender={answer.question.type === "scale"}>
@@ -127,14 +127,15 @@ export const PreviewFeedback: React.FunctionComponent<Props> = props => {
                 </QuestionFeedback>
               )}
             </OptionalRender>
-            <OptionalRender shouldRender={answer.question.type === "select"}>
+            <OptionalRender shouldRender={answer.question.type === "text"}>
               {() => (
                 <QuestionFeedback key={i}>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: `
-                    ${answer.question.text} <br/><br/>
-                    ${answer.value.replace(/\n/g, "<br/>")}`,
+                      ${answer.question.text} <br/><br/>
+                      ${answer.value.replace(/\n/g, "<br/>")}
+                    `,
                     }}
                   />
                 </QuestionFeedback>
