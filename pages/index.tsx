@@ -70,7 +70,7 @@ export default () => {
     }),
     onSubmit: async values => {
       await axios.post("/api/login", { email: values.email });
-      Router.push("/my-feedback");
+      Router.push("/share-feedback");
     },
   });
 

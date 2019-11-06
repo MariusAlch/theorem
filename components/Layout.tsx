@@ -159,6 +159,10 @@ export const Layout: React.FunctionComponent<{
     Router.replace("/");
   }
 
+  if (!stateContainer.user) {
+    return null;
+  }
+
   return (
     <Root>
       <Header>
