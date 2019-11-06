@@ -1,6 +1,6 @@
 export interface Question {
   type: "scale" | "select" | "text";
-  questionText: string;
+  text: string;
   options?: string[]; // in order from bad to good
 }
 
@@ -9,16 +9,19 @@ export interface Answer {
   value: string;
 }
 
-export type FeedbackSurvey = Question[];
-
-export interface SubmittedFeedback {
-  userEmail: string;
-  answers: Answer[];
+export interface Feedback {
+  user: {
+    email: string;
+    fullName: string;
+    avatar: string;
+  };
+  questions: Question[];
+  answers?: Answer[];
 }
 
 export interface User {
   fullName: string;
   avatar: string;
   email: string;
-  submittedFeedback: SubmittedFeedback[];
+  feedback: Feedback[];
 }

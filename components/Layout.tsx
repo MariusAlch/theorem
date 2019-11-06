@@ -5,6 +5,7 @@ import axios from "axios";
 import Router from "next/router";
 import { StateContainer } from "./StateContainer";
 import { useEffect } from "react";
+import { OptionalRender } from "./OptionalRender";
 
 const Root = styled.div`
   padding-top: 1px;
@@ -192,9 +193,9 @@ export const Layout: React.FunctionComponent<{
           </CycleSection>
           <Separator></Separator>
           <ProfileSection>
-            <AvatarImage src="https://i.pravatar.cc/100?img=5"></AvatarImage>
+            <AvatarImage src={stateContainer.user.avatar}></AvatarImage>
             <LeftProfileSection>
-              <Name>Jane Smith</Name>
+              <Name>{stateContainer.user.fullName}</Name>
               <Logout onClick={onLogout}>LOGOUT</Logout>
             </LeftProfileSection>
           </ProfileSection>
@@ -205,5 +206,3 @@ export const Layout: React.FunctionComponent<{
     </Root>
   );
 };
-
-// TODO: implement logout

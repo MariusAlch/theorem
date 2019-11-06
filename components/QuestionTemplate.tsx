@@ -1,8 +1,11 @@
-import { Layout } from "../components/Layout";
 import { FiChevronLeft } from "react-icons/fi";
 import styled from "styled-components";
 import { AvatarImage, PrimaryButton, SecondaryButton } from "../components/common-components";
 import { ProgressBar } from "../components/ProgressBar";
+import { Question } from "../shared/types";
+import { OptionalRender } from "./OptionalRender";
+import { StateContainer } from "./StateContainer";
+import Router from "next/router";
 
 const Title = styled.div`
   font-size: 31px;
@@ -83,30 +86,56 @@ const Flag = styled.img`
   margin-left: 1.5rem;
 `;
 
-export const QuestionTemplate: React.FunctionComponent<{}> = props => {
+interface Props {
+  question: Question;
+  value: string;
+}
+export const QuestionTemplate: React.FunctionComponent<Props> = props => {
+  const stateContainer = StateContainer.useContainer();
+  const { feedback } = stateContainer;
+  const questionIndex = feedback.questions.indexOf(props.question);
+
+  function onBack() {
+    Router.push("/share-feedback");
+  }
+
+  Router.beforePopState(() => {
+    stateContainer.resetQuestions();
+    return true;
+  });
+
   return (
     <>
-      <BackButton>
+      <BackButton onClick={onBack}>
         <FiChevronLeft color="#59636E" size="1.25rem"></FiChevronLeft> Back
       </BackButton>
       <TopSection>
         <div>
-          <Title>How well did I display courage?</Title>
-          <Explanation>share your feedback for christopher johnson</Explanation>
+          <Title>{props.question.text}</Title>
+          <Explanation>share your feedback for {feedback.user.fullName}</Explanation>
         </div>
-        <AvatarImage src="https://i.pravatar.cc/100?img=5"></AvatarImage>
+        <AvatarImage src={feedback.user.avatar}></AvatarImage>
       </TopSection>
       <QuestionBox>
         {props.children}
         <WizardControls>
-          <SecondaryButton>Previous</SecondaryButton>
-          <PrimaryButton disabled>Next</PrimaryButton>
+          <OptionalRender shouldRender={questionIndex === 0}>
+            <div />
+          </OptionalRender>
+          <OptionalRender shouldRender={questionIndex !== 0}>
+            <SecondaryButton>Previous</SecondaryButton>
+          </OptionalRender>
+          <PrimaryButton onClick={stateContainer.nextQuestion} disabled={!props.value}>
+            Next
+          </PrimaryButton>
         </WizardControls>
-        <ProgressBar progress={0.5}></ProgressBar>
+        <ProgressBar progress={(questionIndex + 1) / feedback.questions.length}></ProgressBar>
         <BottomSection>
           <div>
             <QuestionsCompletedLabel>Questions Completed</QuestionsCompletedLabel>
-            <div>1/17</div>
+            <div>
+              {questionIndex + 1}/{feedback.questions.length}
+            </div>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Star src="/purple-star.svg" />

@@ -3,6 +3,10 @@ import { FiChevronDown } from "react-icons/fi";
 import styled from "styled-components";
 import { PrimaryButton, SecondaryButton } from "../components/common-components";
 import { ProtectedRoute } from "../components/ProtectedRoute";
+import { StateContainer } from "../components/StateContainer";
+import { OptionalRender } from "../components/OptionalRender";
+import { useEffect } from "react";
+import Link from "next/link";
 
 const Root = styled.div`
   margin-left: 24rem;
@@ -99,6 +103,16 @@ const StyledSecondaryButton = styled(SecondaryButton)`
 `;
 
 export default ProtectedRoute(() => {
+  const stateContainer = StateContainer.useContainer();
+
+  useEffect(() => {
+    stateContainer.init();
+  }, []);
+
+  if (!stateContainer.user) {
+    return null;
+  }
+
   return (
     <Layout page="share-feedback">
       <Root>
@@ -113,27 +127,24 @@ export default ProtectedRoute(() => {
           </PeriodSection>
         </TopSection>
         <PeopleList>
-          <Person>
-            <PersonSummary>
-              <AvatarImage src="https://i.pravatar.cc/100?img=5"></AvatarImage>
-              <PersonName>Chris Johnson</PersonName>
-            </PersonSummary>
-            <StyledPrimaryButton>Fill Out</StyledPrimaryButton>
-          </Person>
-          <Person>
-            <PersonSummary>
-              <AvatarImage src="https://i.pravatar.cc/100?img=5"></AvatarImage>
-              <PersonName>Chris Johnson</PersonName>
-            </PersonSummary>
-            <StyledSecondaryButton>View Submission</StyledSecondaryButton>
-          </Person>
-          <Person>
-            <PersonSummary>
-              <AvatarImage src="https://i.pravatar.cc/100?img=5"></AvatarImage>
-              <PersonName>Chris Johnson</PersonName>
-            </PersonSummary>
-            <StyledSecondaryButton>View Submission</StyledSecondaryButton>
-          </Person>
+          {stateContainer.user.feedback.map((feedback, i) => (
+            <Person key={i}>
+              <PersonSummary>
+                <AvatarImage src={feedback.user.avatar}></AvatarImage>
+                <PersonName>{feedback.user.fullName}</PersonName>
+              </PersonSummary>
+              <OptionalRender shouldRender={!feedback.answers}>
+                <Link href={{ pathname: "/fill-questions", query: { email: feedback.user.email } }}>
+                  <StyledPrimaryButton>Fill Out</StyledPrimaryButton>
+                </Link>
+              </OptionalRender>
+              <OptionalRender shouldRender={!!feedback.answers}>
+                <Link href="/my-feedback">
+                  <StyledSecondaryButton>View Submission</StyledSecondaryButton>
+                </Link>
+              </OptionalRender>
+            </Person>
+          ))}
         </PeopleList>
       </Root>
     </Layout>
