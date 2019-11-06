@@ -49,11 +49,7 @@ export const ScaleQuestion: React.FunctionComponent<Props> = props => {
 
   return (
     <QuestionTemplate value={props.value} question={props.question}>
-      <Text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a euismod dolor, non blandit nisl. Sed euismod
-        enim in semper consectetur. Duis elementum venenatis finibus. Sed quis neque diam. Aliquam nec blandit mi, et
-        cursus dolor. Duis pharetra purus nunc, in facilisis ex auctor id.
-      </Text>
+      <Text>{props.question.questionDetails}</Text>
       <ScaleSection>
         {Array(10)
           .fill(0)

@@ -1,6 +1,7 @@
 export interface Question {
   type: "scale" | "select" | "text";
   text: string;
+  questionDetails?: string;
   options?: string[]; // in order from bad to good
 }
 
