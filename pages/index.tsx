@@ -5,6 +5,8 @@ import Router from "next/router";
 import { useFormik } from "formik";
 import { PrimaryButton } from "../components/common-components";
 import * as yup from "yup";
+import { createGlobalStyle } from "styled-components";
+import { useState } from "react";
 
 const Root = styled.div`
   padding: 1px;
@@ -17,7 +19,7 @@ const Root = styled.div`
   position: relative;
 `;
 
-const Modal = styled.form`
+const Modal = styled.form<{ shake?: boolean }>`
   margin-top: 12rem;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   background-color: white;
@@ -30,6 +32,12 @@ const Modal = styled.form`
   align-items: center;
   padding-top: 3rem;
   margin-bottom: 12rem;
+
+  ${p =>
+    p.shake &&
+    `
+    animation: shake 1s cubic-bezier(.36,.07,.19,.97) both;
+  `}
 `;
 
 const Title = styled.div`
@@ -57,7 +65,29 @@ const StyledPrimaryButton = styled(PrimaryButton)`
   margin-top: 2rem;
 `;
 
+const Keyframes = createGlobalStyle`
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-2px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(4px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+      transform: translate3d(-8px, 0, 0);
+    }
+
+    40%, 60% {
+      transform: translate3d(8px, 0, 0);
+    }
+  }
+`;
+
 export default () => {
+  const [shakeModal, setShakeModal] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -69,14 +99,20 @@ export default () => {
         .required(),
     }),
     onSubmit: async values => {
-      await axios.post("/api/login", { email: values.email });
-      Router.push("/share-feedback");
+      axios
+        .post("/api/login", { email: values.email })
+        .then(() => Router.push("/share-feedback"))
+        .catch(() => {
+          setShakeModal(true);
+          setTimeout(() => setShakeModal(false), 1000);
+        });
     },
   });
 
   return (
     <Root>
-      <Modal onSubmit={formik.handleSubmit}>
+      <Keyframes />
+      <Modal shake={shakeModal} onSubmit={formik.handleSubmit}>
         <img src="/h-logo.svg" alt="" />
         <Title>Hosnesto</Title>
         <Input
