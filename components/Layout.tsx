@@ -3,6 +3,8 @@ import { Footer } from "../components/Footer";
 import Link from "next/link";
 import axios from "axios";
 import Router from "next/router";
+import { StateContainer } from "./StateContainer";
+import { useEffect } from "react";
 
 const Root = styled.div`
   padding-top: 1px;
@@ -146,6 +148,12 @@ const Logout = styled.div`
 export const Layout: React.FunctionComponent<{
   page?: "share-feedback" | "my-feedback" | "team-feedback";
 }> = props => {
+  const stateContainer = StateContainer.useContainer();
+
+  useEffect(() => {
+    stateContainer.init();
+  }, []);
+
   async function onLogout() {
     await axios.post("/api/logout");
     Router.replace("/");

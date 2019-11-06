@@ -2,7 +2,7 @@
   "name": "with-typescript",
   "version": "1.0.0",
   "scripts": {
-    "start": "NODE_ENV=production node .next/production-server/index.js",
+    "start": "NODE_ENV=production node .next/production-server/server/index.js",
     "type-check": "tsc",
     "dev": "export NODE_ENV=development && nodemon server/index.ts",
     "test": "cypress run",

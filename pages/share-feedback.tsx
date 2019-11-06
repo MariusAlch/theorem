@@ -2,6 +2,7 @@ import { Layout } from "../components/Layout";
 import { FiChevronDown } from "react-icons/fi";
 import styled from "styled-components";
 import { PrimaryButton, SecondaryButton } from "../components/common-components";
+import { ProtectedRoute } from "../components/ProtectedRoute";
 
 const Root = styled.div`
   margin-left: 24rem;
@@ -97,7 +98,7 @@ const StyledSecondaryButton = styled(SecondaryButton)`
   width: 160px;
 `;
 
-export default () => {
+export default ProtectedRoute(() => {
   return (
     <Layout page="share-feedback">
       <Root>
@@ -137,4 +138,4 @@ export default () => {
       </Root>
     </Layout>
   );
-};
+});

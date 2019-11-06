@@ -1,13 +1,8 @@
 import { Router } from "express";
 import faker from "faker";
+import { User } from "../../shared/types";
 
 export const apiRouter = Router();
-
-interface User {
-  fullName: string;
-  avatar: string;
-  email: string;
-}
 
 const users: User[] = Array(8)
   .fill(0)
@@ -20,6 +15,7 @@ const users: User[] = Array(8)
       fullName: `${firstName} ${lastName}`,
       email: `user${i + 1}@mail.com`,
       avatar: `https://i.pravatar.cc/100?img=${imgId}`,
+      submittedFeedback: [],
     };
   });
 
@@ -41,4 +37,10 @@ apiRouter.post("/api/logout", (req, res) => {
   delete req.session.email;
 
   res.json("OK!");
+});
+
+apiRouter.get("/api/me", (req, res) => {
+  const user = users.find(_ => _.email === req.session.email);
+
+  res.json(user);
 });
