@@ -26,7 +26,6 @@ const CopyRight = styled.div`
   height: 100%;
   right: 2rem;
 
-  font-family: Untitled Sans;
   font-size: 12px;
   line-height: 18px;
   display: flex;

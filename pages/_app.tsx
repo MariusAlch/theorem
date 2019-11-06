@@ -13,7 +13,7 @@ const Global = createGlobalStyle`
     font-size: 16px;
     line-height: 19px;
     color: #031323;
-    font-family: Untitled sans;
+    font-family: Untitled sans, sans-serif;
   }
   * {
     box-sizing: border-box;
