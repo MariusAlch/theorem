@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import { Footer } from "../components/Footer";
+import axios from "axios";
+import Router from "next/router";
+import { useFormik } from "formik";
+import { PrimaryButton } from "../components/common-components";
+import * as yup from "yup";
 
 const Root = styled.div`
   padding: 1px;
@@ -12,7 +17,7 @@ const Root = styled.div`
   position: relative;
 `;
 
-const Modal = styled.div`
+const Modal = styled.form`
   margin-top: 12rem;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   background-color: white;
@@ -46,38 +51,42 @@ const Input = styled.input`
   color: #404040;
 `;
 
-const Button = styled.div`
+const StyledPrimaryButton = styled(PrimaryButton)`
   width: 192px;
   height: 48px;
-
-  font-size: 16px;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #ffffff;
-  font-weight: bold;
-  border-radius: 4px;
-  background: #ab61e5;
-  border-radius: 4px;
   margin-top: 2rem;
-  user-select: none;
-  :hover {
-    filter: brightness(1.2);
-  }
-  cursor: pointer;
-  transition: all 0.1s ease;
 `;
 
 export default () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: yup.object({
+      email: yup
+        .string()
+        .email()
+        .required(),
+    }),
+    onSubmit: async values => {
+      await axios.post("/api/login", { email: values.email });
+      Router.push("/my-feedback");
+    },
+  });
+
   return (
     <Root>
-      <Modal>
+      <Modal onSubmit={formik.handleSubmit}>
         <img src="/h-logo.svg" alt="" />
         <Title>Hosnesto</Title>
-        <Input placeholder="Enter email..."></Input>
-        <Button>Login</Button>
+        <Input
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          name="email"
+          placeholder="Enter email..."></Input>
+        <StyledPrimaryButton type="submit" disabled={!formik.dirty || !formik.isValid}>
+          Login
+        </StyledPrimaryButton>
       </Modal>
       <Footer />
     </Root>

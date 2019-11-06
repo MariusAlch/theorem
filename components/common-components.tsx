@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PrimaryButton = styled.div<{ disabled?: boolean }>`
+export const PrimaryButton = styled.button<{ disabled?: boolean }>`
   height: 48px;
   width: 160px;
   font-size: 16px;
@@ -8,6 +8,8 @@ export const PrimaryButton = styled.div<{ disabled?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
+  border: none;
 
   color: #ffffff;
   font-weight: bold;

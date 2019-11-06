@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Footer } from "../components/Footer";
+import Link from "next/link";
+import axios from "axios";
+import Router from "next/router";
 
 const Root = styled.div`
   padding-top: 1px;
@@ -140,19 +143,32 @@ const Logout = styled.div`
   cursor: pointer;
 `;
 
-export const Layout: React.FunctionComponent<{}> = props => {
+export const Layout: React.FunctionComponent<{
+  page?: "share-feedback" | "my-feedback" | "team-feedback";
+}> = props => {
+  async function onLogout() {
+    await axios.post("/api/logout");
+    Router.replace("/");
+  }
+
   return (
     <Root>
       <Header>
         <Title>Honesto</Title>
         <Links>
-          <HeaderLink highlight={true}>
-            Share Feedback <Counter>2</Counter>
-          </HeaderLink>
-          <HeaderLink highlight={false}>
-            My Feedback <Counter>8</Counter>
-          </HeaderLink>
-          <HeaderLink highlight={false}>Team Feedback</HeaderLink>
+          <Link href="/share-feedback">
+            <HeaderLink highlight={props.page === "share-feedback"}>
+              Share Feedback <Counter>2</Counter>
+            </HeaderLink>
+          </Link>
+          <Link href="/my-feedback">
+            <HeaderLink highlight={props.page === "my-feedback"}>
+              My Feedback <Counter>8</Counter>
+            </HeaderLink>
+          </Link>
+          <Link href="/team-feedback">
+            <HeaderLink highlight={props.page === "team-feedback"}>Team Feedback</HeaderLink>
+          </Link>
           <HeaderLink highlight={false}>Teams</HeaderLink>
         </Links>
         <TopRightSection>
@@ -167,7 +183,7 @@ export const Layout: React.FunctionComponent<{}> = props => {
             <AvatarImage src="https://i.pravatar.cc/100?img=5"></AvatarImage>
             <LeftProfileSection>
               <Name>Jane Smith</Name>
-              <Logout>LOGOUT</Logout>
+              <Logout onClick={onLogout}>LOGOUT</Logout>
             </LeftProfileSection>
           </ProfileSection>
         </TopRightSection>

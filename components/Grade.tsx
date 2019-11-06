@@ -13,8 +13,6 @@ const GradeBlock = styled.div<{ color?: string }>`
   flex-grow: 1;
   flex-basis: 0;
   filter: brightness(0.95);
-
-  /* background: darkred; */
   & + & {
     margin-left: 4px;
   }

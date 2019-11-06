@@ -99,7 +99,7 @@ const StyledSecondaryButton = styled(SecondaryButton)`
 
 export default () => {
   return (
-    <Layout>
+    <Layout page="share-feedback">
       <Root>
         <TopSection>
           <Title>Share Feedback</Title>

@@ -3,6 +3,7 @@ import { FiChevronDown } from "react-icons/fi";
 import styled from "styled-components";
 import { PrimaryButton, SecondaryButton, AvatarImage } from "../components/common-components";
 import { Grade } from "../components/Grade";
+import { ProtectedRoute } from "../components/ProtectedRoute";
 
 const Root = styled.div`
   margin-left: 24rem;
@@ -143,9 +144,9 @@ const Text = styled.div`
   margin-right: 0.25rem;
 `;
 
-export default () => {
+export default ProtectedRoute(() => {
   return (
-    <Layout>
+    <Layout page="my-feedback">
       <Root>
         <TopSection>
           <Title>My Feedback</Title>
@@ -238,4 +239,4 @@ export default () => {
       </Root>
     </Layout>
   );
-};
+});
