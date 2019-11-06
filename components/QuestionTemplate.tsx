@@ -123,7 +123,7 @@ export const QuestionTemplate: React.FunctionComponent<Props> = props => {
             <div />
           </OptionalRender>
           <OptionalRender shouldRender={questionIndex !== 0}>
-            <SecondaryButton>Previous</SecondaryButton>
+            <SecondaryButton onClick={stateContainer.previousQuestion}>Previous</SecondaryButton>
           </OptionalRender>
           <PrimaryButton onClick={stateContainer.nextQuestion} disabled={!props.value}>
             Next

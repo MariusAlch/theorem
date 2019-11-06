@@ -20,7 +20,10 @@ export const StateContainer = createContainer(() => {
 
     //handle non last step
     if (questionIndex < feedback.questions.length - 1) {
-      setAnswers([...answers, answer]);
+      const newAnswers = [...answers];
+      newAnswers[questionIndex] = answer;
+
+      setAnswers(newAnswers);
       setValue("");
       setQuestionIndex(questionIndex + 1);
       return;
@@ -31,6 +34,11 @@ export const StateContainer = createContainer(() => {
       answers: [...answers, answer],
     });
     Router.replace("/my-feedback");
+  }
+
+  async function previousQuestion() {
+    setValue(answers[questionIndex - 1].value);
+    setQuestionIndex(questionIndex - 1);
   }
 
   function resetQuestions() {
@@ -60,6 +68,7 @@ export const StateContainer = createContainer(() => {
     setAnswers,
     init,
     user,
+    previousQuestion,
     nextQuestion,
     resetQuestions,
   };

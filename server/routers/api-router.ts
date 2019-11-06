@@ -77,7 +77,7 @@ apiRouter.get("/api/me", (req, res) => {
 
   const feedbackForMe = users
     .flatMap(user => user.feedback)
-    .filter(feedback => feedback.user.email === req.session.email);
+    .filter(feedback => feedback.user.email === req.session.email && !!feedback.answers);
 
   res.json({ ...user, feedbackForMe });
 });
