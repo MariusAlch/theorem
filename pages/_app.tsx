@@ -19,23 +19,6 @@ const Global = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  @font-face {
-    font-family: "Untitled Sans";
-    src: url('/font/Untitled_Sans_Regular.woff2');
-    font-weight: 400;
-  }
-  @font-face {
-    font-family: "Untitled Sans";
-    src: url('/font/Untitled_Sans_Medium.woff2');
-    font-weight: 700;
-  }
-  @font-face {
-    font-family: "Untitled Sans";
-    
-    src: url('/font/Untitled_Sans_Bold.woff2');
-    font-weight: 900;
-  }
-
 `;
 
 export default class extends App {

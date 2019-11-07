@@ -1,10 +1,8 @@
 import { Layout } from "../components/Layout";
 import { FiChevronDown } from "react-icons/fi";
 import styled from "styled-components";
-import { PrimaryButton, SecondaryButton, AvatarImage } from "../components/common-components";
-import { Grade } from "../components/Grade";
 import { ProtectedRoute } from "../components/ProtectedRoute";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { StateContainer } from "../components/StateContainer";
 import { OptionalRender } from "../components/OptionalRender";
 import { PreviewFeedback } from "../components/PreviewFeedback";

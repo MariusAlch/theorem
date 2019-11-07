@@ -7,6 +7,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import next from "next";
+import http from "http";
 import cookieSession from "cookie-session";
 import { apiRouter } from "./routers/api-router";
 
@@ -40,3 +41,8 @@ nextApp.prepare().then(async () => {
     console.log(`server is listening on port ${port}`);
   });
 });
+
+// keep heorku app alive
+setInterval(function() {
+  http.get("https://marius-theorem.herokuapp.com/");
+}, 300000); // every 5 minutes (300000)
