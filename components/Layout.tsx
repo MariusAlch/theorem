@@ -156,6 +156,9 @@ export const Layout: React.FunctionComponent<{
     Router.replace("/");
   }
 
+  const feedbackNeededToFill = stateContainer.user.feedback.filter(fb => !fb.answers);
+  const feedbackFilled = stateContainer.user.feedback.filter(fb => !!fb.answers);
+
   return (
     <Root>
       <Header>
@@ -163,12 +166,18 @@ export const Layout: React.FunctionComponent<{
         <Links>
           <Link href="/share-feedback">
             <HeaderLink highlight={props.page === "share-feedback"}>
-              Share Feedback <Counter>2</Counter>
+              Share Feedback
+              <OptionalRender shouldRender={feedbackNeededToFill.length !== 0}>
+                <Counter>{feedbackNeededToFill.length}</Counter>
+              </OptionalRender>
             </HeaderLink>
           </Link>
           <Link href="/my-feedback">
             <HeaderLink highlight={props.page === "my-feedback"}>
-              My Feedback <Counter>8</Counter>
+              My Feedback
+              <OptionalRender shouldRender={feedbackFilled.length !== 0}>
+                <Counter>{feedbackFilled.length}</Counter>
+              </OptionalRender>
             </HeaderLink>
           </Link>
           <Link href="/team-feedback">
