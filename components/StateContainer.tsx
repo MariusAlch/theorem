@@ -12,10 +12,10 @@ export const StateContainer = createContainer(() => {
   const [feedback, setFeedback] = useState<Feedback>(undefined);
   const [questionIndex, setQuestionIndex] = useState<number>(0);
 
-  async function nextQuestion() {
+  async function nextQuestion(skip: boolean) {
     const answer: Answer = {
       question: feedback.questions[questionIndex],
-      value: value,
+      value: skip ? "skip" : value,
     };
 
     //handle non last step
@@ -36,8 +36,9 @@ export const StateContainer = createContainer(() => {
     Router.replace("/my-feedback");
   }
 
-  async function previousQuestion() {
-    setValue(answers[questionIndex - 1].value);
+  function previousQuestion() {
+    const value = answers[questionIndex - 1].value;
+    setValue(value === "skip" ? "" : value);
     setQuestionIndex(questionIndex - 1);
   }
 

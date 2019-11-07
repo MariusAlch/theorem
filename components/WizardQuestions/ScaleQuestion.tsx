@@ -1,7 +1,7 @@
-import { QuestionTemplate } from "./QuestionTemplate";
+import { QuestionTemplate } from "../QuestionTemplate";
 import styled from "styled-components";
 import { useState } from "react";
-import { Question } from "../shared/types";
+import { Question } from "../../shared/types";
 
 const Text = styled.div`
   margin-bottom: 2rem;

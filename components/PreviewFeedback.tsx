@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import { AvatarImage } from "../components/common-components";
+import { AvatarImage, QuestionFeedback, Text } from "../components/common-components";
 import { Grade } from "../components/Grade";
 import { OptionalRender } from "../components/OptionalRender";
 import { Feedback } from "../shared/types";
 import { useState } from "react";
+import React from "react";
+import { TextAnswer } from "./PreviewAnswers/TextAnswer";
+import { SelectAnswer } from "./PreviewAnswers/SelectAnswer";
+import { ScaleAnswer } from "./PreviewAnswers/ScaleAnswer";
 
 const ContentBox = styled.div`
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
@@ -71,20 +75,6 @@ const RightTitle = styled.div`
   border-bottom: 1px solid #d9dcde;
 `;
 
-const QuestionFeedback = styled.div`
-  padding: 1.5rem;
-  display: flex;
-  & + & {
-    border-top: 1px solid #d9dcde;
-  }
-`;
-
-const Text = styled.div`
-  flex-grow: 1;
-  flex-basis: 0;
-  margin-right: 0.25rem;
-`;
-
 interface Props {
   feedback: Feedback[];
   type?: "received" | "given";
@@ -110,41 +100,17 @@ export const PreviewFeedback: React.FunctionComponent<Props> = props => {
       <RightContent>
         <RightTitle>{selectedFeedback.user.fullName}’s Feedback</RightTitle>
         {selectedFeedback.answers.map((answer, i) => (
-          <>
+          <React.Fragment key={i}>
             <OptionalRender shouldRender={answer.question.type === "scale"}>
-              {() => (
-                <QuestionFeedback key={i}>
-                  <Text>{answer.question.text}</Text>
-                  <Grade value={Number(answer.value)} max={10} />
-                </QuestionFeedback>
-              )}
+              {() => <ScaleAnswer answer={answer} />}
             </OptionalRender>
             <OptionalRender shouldRender={answer.question.type === "select"}>
-              {() => (
-                <QuestionFeedback key={i}>
-                  <Text>{answer.question.text}</Text>
-                  <Grade
-                    value={answer.question.options.indexOf(answer.value) + 1}
-                    max={answer.question.options.length}
-                  />
-                </QuestionFeedback>
-              )}
+              {() => <SelectAnswer answer={answer} />}
             </OptionalRender>
             <OptionalRender shouldRender={answer.question.type === "text"}>
-              {() => (
-                <QuestionFeedback key={i}>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: `
-                      ${answer.question.text} <br/><br/>
-                      ${answer.value.replace(/\n/g, "<br/>")}
-                    `,
-                    }}
-                  />
-                </QuestionFeedback>
-              )}
+              {() => <TextAnswer answer={answer} />}
             </OptionalRender>
-          </>
+          </React.Fragment>
         ))}
       </RightContent>
     </ContentBox>

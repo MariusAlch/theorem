@@ -2,9 +2,9 @@ import { Layout } from "../components/Layout";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { StateContainer } from "../components/StateContainer";
-import { TextQuestion } from "../components/TextQuestion";
-import { SelectQuestion } from "../components/SelectQuestion";
-import { ScaleQuestion } from "../components/ScaleQuestion";
+import { TextQuestion } from "../components/WizardQuestions/TextQuestion";
+import { SelectQuestion } from "../components/WizardQuestions/SelectQuestion";
+import { ScaleQuestion } from "../components/WizardQuestions/ScaleQuestion";
 import { OptionalRender } from "../components/OptionalRender";
 import Router from "next/router";
 

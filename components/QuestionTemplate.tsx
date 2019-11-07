@@ -115,12 +115,13 @@ export const QuestionTemplate: React.FunctionComponent<Props> = props => {
         {props.children}
         <WizardControls>
           <OptionalRender shouldRender={questionIndex === 0}>
-            <div />
+            <div style={{ width: 160 }} />
           </OptionalRender>
           <OptionalRender shouldRender={questionIndex !== 0}>
             <SecondaryButton onClick={stateContainer.previousQuestion}>Previous</SecondaryButton>
           </OptionalRender>
-          <PrimaryButton onClick={stateContainer.nextQuestion} disabled={!props.value}>
+          <SecondaryButton onClick={() => stateContainer.nextQuestion(true)}>Skip</SecondaryButton>
+          <PrimaryButton onClick={() => stateContainer.nextQuestion(false)} disabled={!props.value}>
             Next
           </PrimaryButton>
         </WizardControls>

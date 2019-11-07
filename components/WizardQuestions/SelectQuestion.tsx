@@ -1,6 +1,6 @@
-import { QuestionTemplate } from "./QuestionTemplate";
+import { QuestionTemplate } from "../QuestionTemplate";
 import styled from "styled-components";
-import { Question } from "../shared/types";
+import { Question } from "../../shared/types";
 
 const SelectOption = styled.div<{ selected?: boolean }>`
   background: #f2f3f4;

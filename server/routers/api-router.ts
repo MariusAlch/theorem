@@ -11,7 +11,7 @@ const feedbackQuestions: Question[] = [
       Answer to this question should be based on the performance of the team member based of the project length.
       Now I will continue to write words so I can fill some space in the question details for this question to look more realistic.
     `,
-    text: "How do yuo think I am doing?",
+    text: "How do you think I am doing?",
   },
   {
     type: "select",
