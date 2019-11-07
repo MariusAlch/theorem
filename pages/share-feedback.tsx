@@ -143,7 +143,7 @@ export default ProtectedRoute(() => {
                 <StyledPrimaryButton onClick={() => onFillOutClick(feedback.user.email)}>Fill Out</StyledPrimaryButton>
               </OptionalRender>
               <OptionalRender shouldRender={!!feedback.answers}>
-                <Link href="/my-feedback">
+                <Link href={{ pathname: "/my-feedback", query: { email: feedback.user.email } }}>
                   <StyledSecondaryButton>View Submission</StyledSecondaryButton>
                 </Link>
               </OptionalRender>

@@ -33,7 +33,7 @@ export const StateContainer = createContainer(() => {
       ...feedback,
       answers: [...answers, answer],
     });
-    Router.replace("/my-feedback");
+    Router.replace({ pathname: "/my-feedback", query: { email: feedback.user.email } });
   }
 
   function previousQuestion() {

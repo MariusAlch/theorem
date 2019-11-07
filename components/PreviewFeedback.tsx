@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { AvatarImage, QuestionFeedback, Text } from "../components/common-components";
-import { Grade } from "../components/Grade";
+import { AvatarImage } from "../components/common-components";
 import { OptionalRender } from "../components/OptionalRender";
 import { Feedback } from "../shared/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { TextAnswer } from "./PreviewAnswers/TextAnswer";
 import { SelectAnswer } from "./PreviewAnswers/SelectAnswer";
@@ -77,11 +76,22 @@ const RightTitle = styled.div`
 
 interface Props {
   feedback: Feedback[];
+  preselectEmail?: string;
   type?: "received" | "given";
 }
 
 export const PreviewFeedback: React.FunctionComponent<Props> = props => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  /**
+   * handle preview preselect
+   */
+  useEffect(() => {
+    const index = props.feedback.findIndex(fb => fb.user.email === props.preselectEmail);
+    if (index !== -1) {
+      setSelectedIndex(index);
+    }
+  }, [props.feedback]);
 
   const selectedFeedback = props.feedback[selectedIndex];
   return (

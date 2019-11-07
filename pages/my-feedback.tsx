@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { StateContainer } from "../components/StateContainer";
 import { OptionalRender } from "../components/OptionalRender";
 import { PreviewFeedback } from "../components/PreviewFeedback";
+import Router from "next/router";
 
 const Root = styled.div`
   margin-left: 24rem;
@@ -126,7 +127,7 @@ export default ProtectedRoute(() => {
                   <PrimaryButton style={{ width: 190 }}>Publish Feedback</PrimaryButton>
                 </PeriodControls>
               </TopSection>
-              <PreviewFeedback feedback={feedbackGiven}></PreviewFeedback>
+              <PreviewFeedback preselectEmail={Router.query.email as string} feedback={feedbackGiven}></PreviewFeedback>
             </>
           )}
         </OptionalRender>
