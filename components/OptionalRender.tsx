@@ -8,8 +8,10 @@ export class OptionalRender extends React.Component<Props> {
   render() {
     const { shouldRender, children } = this.props;
 
-    const willRender = typeof shouldRender === "function" ? shouldRender() : shouldRender;
+    if (!shouldRender) {
+      return null;
+    }
 
-    return willRender ? typeof children === "function" ? <>{(children as (() => void))()}</> : <>{children}</> : null;
+    return typeof children === "function" ? children() : children;
   }
 }
